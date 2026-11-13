@@ -93,11 +93,11 @@ Nội dung case study viết từ spec. Hai dự án chưa làm được mô t�
 
 ## Còn thiếu từ bạn
 
-1. Địa chỉ email muốn hiện công khai.
+1. ~~Địa chỉ email muốn hiện công khai.~~ Đã có: `nhuhuy1999@gmail.com`.
 2. Link repo của Booking Platform (tôi không thấy nó trong danh sách repo GitHub của bạn) và ảnh chụp màn hình nếu có.
 3. Sau khi code được merge vào nhánh mặc định: bật Pages một lần tại Settings → Pages → Source: "GitHub Actions".
 
-Thiếu mục 1 và 2 vẫn build được: kênh hoặc link nào chưa có thì không hiển thị.
+Thiếu mục 2 vẫn build được: kênh hoặc link nào chưa có thì không hiển thị.
 
 ## Kiểm tra trước khi báo xong
 
