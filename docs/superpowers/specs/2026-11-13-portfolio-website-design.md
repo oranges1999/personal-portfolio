@@ -20,7 +20,6 @@ Nguồn nội dung: doc "Spec dự án cá nhân và portfolio" và hồ sơ Upw
 
 - Không nhắc tới design tool cho file .pen (spec ghi là riêng tư).
 - Không hiện giá theo giờ, tên công ty đang làm, hay thông tin cá nhân ngoài các kênh liên hệ đã chọn.
-- Không có form liên hệ gửi qua server (GitHub Pages là site tĩnh).
 - Không có blog, CMS, analytics.
 
 ## Điều phải tránh
@@ -64,6 +63,15 @@ Footer
 ```
 
 **Trang case study** `/projects/<slug>`: vấn đề, vai trò người dùng, tính năng chính, stack, điểm kỹ thuật đáng chú ý, ảnh chụp (nếu có), link demo và repo (nếu có).
+
+**Form liên hệ → Google Sheet**
+
+- Form ở phần Contact: tên, email, nội dung. Kiểm tra dữ liệu phía trình duyệt, có ô bẫy (honeypot) chống bot.
+- Site gửi dữ liệu tới một Google Apps Script gắn với trang tính "Portfolio – Contact form submissions"; script ghi thêm một dòng: thời gian, tên, email, nội dung, ngôn ngữ, trang.
+- Trang tính ở chế độ riêng tư, chỉ chủ sở hữu xem được. Script chạy dưới quyền chủ sở hữu nên khách gửi được mà không đọc được trang tính.
+- Script giới hạn độ dài từng trường và bỏ qua bài gửi có ô bẫy được điền.
+- URL của script đặt trong cấu hình site (`NUXT_PUBLIC_CONTACT_ENDPOINT`). Chưa có URL thì form ẩn, chỉ hiện các link liên hệ.
+- Mã script nằm trong repo tại `google-apps-script/contact-form.gs`. Bạn dán vào trang tính và deploy một lần (tôi không deploy Apps Script thay bạn được).
 
 **Trạng thái dự án**
 
