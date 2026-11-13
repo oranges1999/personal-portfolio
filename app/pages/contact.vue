@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { profile } from '~/data/profile'
+const { t } = useI18n()
 const { contactEndpoint } = useRuntimeConfig().public
 const hasForm = computed(() => Boolean(contactEndpoint))
 const channels = [
@@ -7,17 +8,17 @@ const channels = [
   { label: 'GitHub', text: profile.links.github.replace('https://', ''), href: profile.links.github, external: true },
   { label: 'Email', text: profile.links.email, href: `mailto:${profile.links.email}`, external: false },
 ]
+usePageSeo(() => t('nav.contact'), () => t('pages.contact.seoDescription'))
 </script>
 
 <template>
-  <section id="contact" class="section">
-    <div class="container-page grid gap-10" :class="hasForm ? 'lg:grid-cols-2' : ''">
-      <div>
-        <p class="eyebrow">{{ $t('home.contactEyebrow') }}</p>
-        <h2 class="h2">{{ $t('home.contactTitle') }}</h2>
-        <p class="mt-4 max-w-xl text-muted">{{ $t('home.contactLead') }}</p>
-        <p v-if="hasForm" class="mt-8 text-sm font-semibold">{{ $t('home.contactOr') }}</p>
-        <ul class="mt-4 grid max-w-xl gap-3">
+  <div>
+    <UiPageHeader :eyebrow="t('pages.contact.eyebrow')" :title="t('home.contactTitle')" :lead="t('home.contactLead')" />
+    <div id="contact" class="container-page grid gap-10 py-12 sm:py-16" :class="hasForm ? 'lg:grid-cols-2' : ''">
+      <ContactForm v-if="hasForm" :endpoint="contactEndpoint" data-reveal />
+      <div data-reveal>
+        <p v-if="hasForm" class="text-sm font-semibold">{{ t('home.contactOr') }}</p>
+        <ul class="grid max-w-xl gap-3" :class="hasForm ? 'mt-4' : ''">
           <li v-for="c in channels" :key="c.label">
             <a
               :href="c.href"
@@ -31,7 +32,6 @@ const channels = [
           </li>
         </ul>
       </div>
-      <ContactForm v-if="hasForm" :endpoint="contactEndpoint" />
     </div>
-  </section>
+  </div>
 </template>

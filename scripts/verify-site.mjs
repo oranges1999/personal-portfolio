@@ -30,15 +30,15 @@ const origin = `http://localhost:${server.address().port}`
 
 const failures = []
 const fail = (where, msg) => { failures.push(`${where}: ${msg}`); console.log(`  FAIL ${where}: ${msg}`) }
-const RAW_KEY = /\b(nav|home|contact|status|footer|project|seo|error|theme|lang)\.[a-zA-Z-]+(\.[a-zA-Z]+)?\b/
+const RAW_KEY = /\b(pages|nav|home|contact|status|footer|project|seo|error|theme|lang)\.[a-zA-Z-]+(\.[a-zA-Z]+)?\b/
 
 await mkdir(OUT, { recursive: true })
 const browser = await chromium.launch()
-const pages = ['', 'vi/', 'projects/booking-platform/', 'vi/projects/ai-report-agent/', 'projects/language-landing/']
+const pages = ['', 'vi/', 'services/', 'vi/services/', 'projects/', 'about/', 'vi/about/', 'contact/', 'projects/booking-platform/', 'vi/projects/ai-report-agent/', 'projects/language-landing/']
 
 for (const width of [375, 1280]) {
   for (const scheme of ['light', 'dark']) {
-    const ctx = await browser.newContext({ viewport: { width, height: 900 }, colorScheme: scheme, deviceScaleFactor: 1 })
+    const ctx = await browser.newContext({ viewport: { width, height: 900 }, colorScheme: scheme, deviceScaleFactor: 1, reducedMotion: 'reduce' })
     for (const p of pages) {
       const where = `${p || '/'} @${width} ${scheme}`
       const page = await ctx.newPage()
@@ -71,6 +71,7 @@ for (const width of [375, 1280]) {
         if (h.startsWith('/') && !h.startsWith(BASE)) fail(where, `link escapes base path: ${h}`)
       }
       if (/\.pen\b|\$12/.test(info.text)) fail(where, 'private detail visible')
+      if (await page.evaluate(() => document.documentElement.classList.contains('is-preloading'))) fail(where, 'preloader shown despite reduced motion')
 
       const name = `${(p || 'home').replace(/\//g, '_')}-${width}-${scheme}.png`
       await page.screenshot({ path: join(OUT, name), fullPage: true })
@@ -81,18 +82,18 @@ for (const width of [375, 1280]) {
 }
 
 // Behaviour checks
-const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } })
+const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: 'reduce' })
 const page = await ctx.newPage()
 
 await page.goto(origin + BASE, { waitUntil: 'networkidle' })
-if (await page.locator('#projects article').count() !== 3) fail('home', 'expected three project cards')
+if (await page.locator('main article').count() !== 3) fail('home', 'expected three project cards')
 
 await page.goto(origin + BASE + 'projects/booking-platform/', { waitUntil: 'networkidle' })
 await page.locator('a[lang="vi"]').click()
 await page.waitForURL('**/vi/projects/booking-platform**')
 if (!(await page.locator('h1').innerText()).includes('Nền tảng')) fail('lang switch', 'case study did not switch to Vietnamese')
 await page.locator('header a', { hasText: 'Dự án' }).first().click()
-await page.waitForURL('**/vi**#projects')
+await page.waitForURL('**/vi/projects')
 
 await page.goto(origin + BASE, { waitUntil: 'networkidle' })
 await page.locator('button[aria-label*="theme"]').click()
@@ -106,7 +107,7 @@ if (await page.locator('[data-error-page]').count() !== 1) fail('404', 'error pa
 await page.screenshot({ path: join(OUT, '404.png') })
 
 // Contact form (only present when the site was generated with NUXT_PUBLIC_CONTACT_ENDPOINT)
-await page.goto(origin + BASE, { waitUntil: 'networkidle' })
+await page.goto(origin + BASE + 'contact/', { waitUntil: 'networkidle' })
 if (await page.locator('#contact form').count()) {
   console.log('Checking contact form')
   let posts = []
@@ -153,15 +154,89 @@ if (await page.locator('#contact form').count()) {
 }
 
 // Mobile menu
-const m = await browser.newContext({ viewport: { width: 375, height: 800 } })
+const m = await browser.newContext({ viewport: { width: 375, height: 800 }, reducedMotion: 'reduce' })
 const mp = await m.newPage()
 await mp.goto(origin + BASE, { waitUntil: 'networkidle' })
 await mp.locator('button[aria-controls="mobile-nav"]').click()
 if (!(await mp.locator('#mobile-nav').isVisible())) fail('mobile', 'menu did not open')
 await mp.locator('#mobile-nav a', { hasText: 'Contact' }).click()
-await mp.waitForTimeout(800)
+await mp.waitForURL('**/contact')
 if (await mp.locator('#mobile-nav').isVisible()) fail('mobile', 'menu stayed open after navigating')
-if (!(await mp.locator('#contact').evaluate(el => { const r = el.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0 }))) fail('mobile', 'contact section not scrolled into view')
+
+// Preloader, page transition and scroll reveals (motion allowed)
+console.log('Checking preloader and transitions')
+for (const width of [1280, 375]) {
+  const mc = await browser.newContext({ viewport: { width, height: 800 } })
+  const p = await mc.newPage()
+  const errs = []
+  p.on('pageerror', e => errs.push(e.message))
+  const where = `motion @${width}`
+  const curtain = () => p.evaluate(() => document.documentElement.dataset.curtainState)
+  const hiddenReveals = () => p.evaluate(() => [...document.querySelectorAll('[data-reveal]')]
+    .filter(el => { const r = el.getBoundingClientRect(); return r.top < innerHeight * 0.85 && r.bottom > 0 && getComputedStyle(el).opacity !== '1' }).length)
+
+  await p.goto(origin + BASE, { waitUntil: 'commit' })
+  await p.waitForFunction(() => document.documentElement.dataset.curtainState === 'intro', null, { timeout: 5000 })
+    .catch(() => fail(where, 'preloader intro never started'))
+  await p.waitForTimeout(500)
+  await p.screenshot({ path: join(OUT, `motion-intro-${width}.png`) })
+  await p.waitForFunction(() => document.documentElement.dataset.curtainState === 'idle', null, { timeout: 8000 })
+    .catch(() => fail(where, 'preloader never finished'))
+  if (await p.evaluate(() => document.documentElement.classList.contains('is-preloading'))) fail(where, 'is-preloading class left behind')
+  if (await p.evaluate(() => getComputedStyle(document.querySelector('[data-curtain]')).visibility) !== 'hidden') fail(where, 'curtain still visible after intro')
+  await p.waitForTimeout(1200)
+  if (await hiddenReveals()) fail(where, 'content in view still hidden after intro')
+
+  // Navigate: curtain covers, shows the destination name, then uncovers the new page at the top
+  await p.evaluate(() => window.scrollTo(0, 600))
+  if (width < 768) await p.locator('button[aria-controls="mobile-nav"]').click()
+  await p.locator(width < 768 ? '#mobile-nav a' : 'header nav a', { hasText: 'Services' }).first().click()
+  await p.waitForFunction(() => document.documentElement.dataset.curtainState === 'covering', null, { timeout: 3000 })
+    .catch(() => fail(where, 'curtain did not cover on navigation'))
+  await p.waitForFunction(() => document.querySelector('[data-curtain-label]') && getComputedStyle(document.querySelector('[data-curtain-label]')).opacity === '1', null, { timeout: 3000 }).catch(() => {})
+  if ((await p.locator('[data-curtain-text]').innerText()) !== 'Services') fail(where, 'curtain label is not the destination page')
+  await p.screenshot({ path: join(OUT, `motion-transition-${width}.png`) })
+  await p.waitForFunction(() => document.documentElement.dataset.curtainState === 'idle', null, { timeout: 8000 })
+    .catch(() => fail(where, 'transition never finished'))
+  if (!p.url().endsWith('/services')) fail(where, `unexpected url ${p.url()}`)
+  if (await p.evaluate(() => window.scrollY) !== 0) fail(where, 'new page did not start at the top')
+  await p.waitForTimeout(1200)
+  if (await hiddenReveals()) fail(where, 'content in view still hidden after transition')
+
+  // Scroll through the page: everything must end up visible
+  const height = await p.evaluate(() => document.documentElement.scrollHeight)
+  for (let y = 0; y < height; y += 400) { await p.mouse.wheel(0, 400); await p.waitForTimeout(120) }
+  await p.waitForTimeout(1200)
+  const stuck = await p.evaluate(() => [...document.querySelectorAll('[data-reveal]')].filter(el => getComputedStyle(el).opacity !== '1').length)
+  if (stuck) fail(where, `${stuck} element(s) never revealed after scrolling`)
+
+  // Back button and a deep link straight into a case study
+  // A navigation is settled once the curtain has started and then returned to idle
+  const settle = async (what, pathPart) => {
+    await p.waitForFunction(() => document.documentElement.dataset.curtainState !== 'idle', null, { timeout: 3000 }).catch(() => {})
+    await p.waitForFunction(part => document.documentElement.dataset.curtainState === 'idle' && location.pathname.endsWith(part), pathPart, { timeout: 8000 })
+      .catch(() => fail(where, `${what} did not settle`))
+  }
+  await p.goBack()
+  await settle('back navigation', '/personal-portfolio/')
+  // Cards below the fold are hidden until scrolled to, so scroll like a person would before clicking
+  await p.locator('main article').first().evaluate(el => window.scrollTo(0, el.getBoundingClientRect().top + scrollY - 200))
+  await p.waitForTimeout(1500)
+  if (await hiddenReveals()) fail(where, 'cards still hidden after scrolling to them on a page reached with Back')
+  await p.locator('main article a').first().click()
+  await settle('navigation to case study', '/projects/booking-platform')
+  if (!(await p.locator('h1').isVisible())) fail(where, 'case study heading not visible')
+  errs.forEach(e => fail(where, `pageerror: ${e}`))
+  await mc.close()
+}
+
+// Without JavaScript the content must still be readable (nothing hidden in the HTML itself)
+const nojs = await browser.newContext({ javaScriptEnabled: false })
+const np = await nojs.newPage()
+await np.goto(origin + BASE + 'services/')
+if (!(await np.locator('h1').isVisible())) fail('no-js', 'heading hidden without JavaScript')
+if (await np.evaluate(() => getComputedStyle(document.querySelector('[data-curtain]')).visibility) !== 'hidden') fail('no-js', 'curtain covers the page without JavaScript')
+await nojs.close()
 
 await browser.close()
 server.close()

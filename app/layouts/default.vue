@@ -15,5 +15,6 @@ useHead(() => ({
       <slot />
     </main>
     <SiteFooter />
+    <SiteCurtain />
   </div>
 </template>

@@ -104,3 +104,13 @@ Thiếu mục 2 vẫn build được: kênh hoặc link nào chưa có thì khô
 - `nuxt generate` chạy không lỗi.
 - Mở bản build bằng trình duyệt ở 375px và 1280px, cả 2 ngôn ngữ, cả sáng và tối; chụp ảnh để xem lại.
 - Mọi link nội bộ hoạt động dưới đường dẫn con `/personal-portfolio/`.
+
+## Bổ sung 2026-11-13: nhiều trang, GSAP, preloader
+
+Theo yêu cầu của bạn sau bản đầu:
+
+- **5 trang** thay cho một trang chủ cuộn dài: Home, Services, Projects (danh sách + trang chi tiết), About, Contact. Menu dẫn tới trang, không cuộn.
+- **Preloader kiểu các cột so le**: màn hình chia 5 cột dọc. Lần đầu vào site, các cột che màn hình kèm tên và bộ đếm 0→100, rồi trượt lên lệch nhau. Khi chuyển trang, các cột trượt lên che trang cũ, hiện tên trang sắp tới, rồi trượt tiếp để lộ trang mới.
+- **GSAP + ScrollTrigger**: các khối nội dung hiện dần khi vào trang và khi cuộn tới.
+- Người xem bật "giảm chuyển động" thì không có preloader, không có animation.
+- Nếu JavaScript không chạy, nội dung vẫn hiện (lớp che tự gỡ sau vài giây, nội dung không bị ẩn sẵn trong HTML).

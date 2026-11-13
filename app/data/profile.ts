@@ -12,39 +12,76 @@ export const profile: Profile = {
   },
   services: [
     {
+      id: 'laravel',
       title: { en: 'Laravel / PHP', vi: 'Laravel / PHP' },
       body: {
         en: 'REST APIs, admin panels, payment integrations, bug fixes and version upgrades.',
         vi: 'REST API, trang quản trị, tích hợp thanh toán, sửa lỗi và nâng cấp phiên bản.',
       },
+      points: [
+        { en: "REST APIs with authentication, validation and clear error responses.", vi: "REST API có xác thực, kiểm tra dữ liệu và thông báo lỗi rõ ràng." },
+        { en: "Admin panels: CRUD, roles and permissions, search, filters, exports.", vi: "Trang quản trị: CRUD, phân quyền theo vai trò, tìm kiếm, bộ lọc, xuất dữ liệu." },
+        { en: "Payment integrations such as Stripe Checkout and webhooks.", vi: "Tích hợp thanh toán như Stripe Checkout và webhook." },
+        { en: "Bug fixes, version upgrades and finishing half-built Laravel projects.", vi: "Sửa lỗi, nâng cấp phiên bản và hoàn thiện dự án Laravel đang làm dở." },
+      ],
+      tools: ["Laravel", "PHP", "Inertia", "MySQL", "Pest"],
     },
     {
+      id: 'vue',
       title: { en: 'Vue.js / Nuxt + Tailwind CSS', vi: 'Vue.js / Nuxt + Tailwind CSS' },
       body: {
         en: 'Responsive, pixel-accurate interfaces built from your Figma designs.',
         vi: 'Giao diện responsive, bám sát từng pixel theo bản thiết kế Figma của bạn.',
       },
+      points: [
+        { en: "Figma designs turned into responsive pages that match at every breakpoint.", vi: "Chuyển thiết kế Figma thành trang responsive, khớp ở mọi kích thước màn hình." },
+        { en: "Reusable components and design tokens, so the next page is faster to build.", vi: "Component dùng lại và design token, để trang tiếp theo làm nhanh hơn." },
+        { en: "Multi-language sites, light and dark themes, scroll and page-transition animation.", vi: "Site đa ngôn ngữ, giao diện sáng/tối, animation khi cuộn và khi chuyển trang." },
+        { en: "Attention to load speed, SEO basics and keyboard accessibility.", vi: "Chú trọng tốc độ tải, SEO cơ bản và khả năng dùng bằng bàn phím." },
+      ],
+      tools: ["Vue 3", "Nuxt", "TypeScript", "Tailwind CSS", "GSAP"],
     },
     {
+      id: 'node',
       title: { en: 'Node.js (Express)', vi: 'Node.js (Express)' },
       body: {
         en: 'Backend services and APIs in JavaScript or TypeScript.',
         vi: 'Dịch vụ backend và API viết bằng JavaScript hoặc TypeScript.',
       },
+      points: [
+        { en: "Backend services and REST APIs in JavaScript or TypeScript.", vi: "Dịch vụ backend và REST API bằng JavaScript hoặc TypeScript." },
+        { en: "Third-party API integrations and webhooks.", vi: "Tích hợp API bên thứ ba và webhook." },
+        { en: "Scripts and small tools that automate repetitive work.", vi: "Script và công cụ nhỏ để tự động hoá việc lặp lại." },
+      ],
+      tools: ["Node.js", "Express", "TypeScript", "MongoDB"],
     },
     {
+      id: 'ai',
       title: { en: 'AI agents & automation', vi: 'AI agent & tự động hoá' },
       body: {
         en: 'LLM-powered tools built on MCP, and AI-assisted development with Claude Code.',
         vi: 'Công cụ dùng LLM xây trên MCP, và phát triển phần mềm có AI hỗ trợ với Claude Code.',
       },
+      points: [
+        { en: "MCP servers that give an AI model safe, well-defined tools to work with your data.", vi: "MCP server cung cấp cho mô hình AI các tool an toàn, định nghĩa rõ ràng để làm việc với dữ liệu của bạn." },
+        { en: "Agents that call tools in a loop and show each step they take.", vi: "Agent gọi tool theo vòng lặp và hiển thị từng bước đang làm." },
+        { en: "AI-assisted development with Claude Code to deliver faster, with code I can still explain line by line.", vi: "Phát triển có AI hỗ trợ bằng Claude Code để giao nhanh hơn, với code tôi vẫn giải thích được từng dòng." },
+      ],
+      tools: ["MCP", "Claude API", "Claude Code", "TypeScript"],
     },
     {
+      id: 'devops',
       title: { en: 'Databases & DevOps', vi: 'Cơ sở dữ liệu & DevOps' },
       body: {
         en: 'MySQL, MongoDB, Docker and CI/CD pipelines that keep releases boring.',
         vi: 'MySQL, MongoDB, Docker và CI/CD để mỗi lần phát hành đều êm.',
       },
+      points: [
+        { en: "Schema design, migrations and query tuning for MySQL and MongoDB.", vi: "Thiết kế schema, migration và tối ưu truy vấn cho MySQL và MongoDB." },
+        { en: "Docker setups that start a project locally with one command.", vi: "Cấu hình Docker để chạy dự án local bằng một lệnh." },
+        { en: "CI/CD pipelines that run tests and deploy on every push.", vi: "Pipeline CI/CD chạy test và deploy mỗi lần push." },
+      ],
+      tools: ["MySQL", "MongoDB", "Docker", "GitHub Actions"],
     },
   ],
   process: [

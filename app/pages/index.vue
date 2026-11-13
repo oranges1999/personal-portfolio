@@ -14,9 +14,6 @@ useSeoMeta({
     <HomeHero />
     <HomeServices />
     <HomeProjects />
-    <HomeProcess />
-    <HomeStack />
-    <HomeAbout />
-    <HomeContact />
+    <UiCtaBand />
   </div>
 </template>

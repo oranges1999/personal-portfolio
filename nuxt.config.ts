@@ -12,6 +12,11 @@ export default defineNuxtConfig({
     baseURL: process.env.NUXT_APP_BASE_URL || '/',
     head: {
       meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
+      // Show the preloader before first paint. If the app never boots, uncover the page anyway.
+      script: [{
+        tagPosition: 'head',
+        innerHTML: "(function(d){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('is-preloading');setTimeout(function(){if(!d.dataset.curtainState)d.classList.remove('is-preloading')},5000)})(document.documentElement)",
+      }],
       link: [{ rel: 'icon', type: 'image/svg+xml', href: `${process.env.NUXT_APP_BASE_URL || '/'}favicon.svg` }],
     },
   },

@@ -21,7 +21,7 @@ export interface Profile {
   name: string
   title: Localized
   intro: Localized
-  services: { title: Localized; body: Localized }[]
+  services: { id: string; title: Localized; body: Localized; points: Localized[]; tools: string[] }[]
   process: { title: Localized; body: Localized }[]
   stack: { group: Localized; items: string[] }[]
   about: Localized[]

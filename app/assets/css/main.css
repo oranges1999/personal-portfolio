@@ -39,14 +39,19 @@
   color-scheme: dark;
 }
 
-html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+html { scroll-padding-top: 5rem; }
 body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
+
+/* Preloader / page-transition overlay. Hidden unless the head script or GSAP turns it on. */
+.curtain { position: fixed; inset: 0; z-index: 100; visibility: hidden; pointer-events: none; }
+html.is-preloading .curtain { visibility: visible; pointer-events: auto; }
+html.is-preloading { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) { .curtain { display: none; } }
 
 @layer components {
   .container-page { @apply mx-auto w-full max-w-5xl px-5 sm:px-8; }

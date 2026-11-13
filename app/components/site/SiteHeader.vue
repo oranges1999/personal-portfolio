@@ -3,6 +3,8 @@ const localePath = useLocalePath()
 const open = ref(false)
 const items = ['services', 'projects', 'about', 'contact'] as const
 const route = useRoute()
+const routeBaseName = useRouteBaseName()
+const current = computed(() => (routeBaseName(route) ?? '').split('-')[0])
 watch(() => route.fullPath, () => { open.value = false })
 </script>
 
@@ -16,7 +18,7 @@ watch(() => route.fullPath, () => { open.value = false })
       <nav class="hidden md:block" :aria-label="$t('nav.main')">
         <ul class="flex items-center gap-7 text-sm text-muted">
           <li v-for="id in items" :key="id">
-            <NuxtLink :to="{ path: localePath('/'), hash: `#${id}` }" class="hover:text-fg">{{ $t(`nav.${id}`) }}</NuxtLink>
+            <NuxtLink :to="localePath(`/${id}`)" class="hover:text-fg" :class="current === id ? 'text-fg' : ''" :aria-current="current === id ? 'page' : undefined">{{ $t(`nav.${id}`) }}</NuxtLink>
           </li>
         </ul>
       </nav>
@@ -43,7 +45,7 @@ watch(() => route.fullPath, () => { open.value = false })
     <nav v-show="open" id="mobile-nav" class="border-t border-border md:hidden" :aria-label="$t('nav.main')">
       <ul class="container-page py-2">
         <li v-for="id in items" :key="id">
-          <NuxtLink :to="{ path: localePath('/'), hash: `#${id}` }" class="block py-3 text-base" @click="open = false">{{ $t(`nav.${id}`) }}</NuxtLink>
+          <NuxtLink :to="localePath(`/${id}`)" class="block py-3 text-base" :aria-current="current === id ? 'page' : undefined" @click="open = false">{{ $t(`nav.${id}`) }}</NuxtLink>
         </li>
       </ul>
     </nav>

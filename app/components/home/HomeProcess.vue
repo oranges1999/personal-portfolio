@@ -4,12 +4,12 @@ const l = useL()
 </script>
 
 <template>
-  <section id="process" class="section">
+  <section class="section">
     <div class="container-page">
-      <p class="eyebrow">{{ $t('home.processEyebrow') }}</p>
-      <h2 class="h2">{{ $t('home.processTitle') }}</h2>
+      <p class="eyebrow" data-reveal>{{ $t('home.processEyebrow') }}</p>
+      <h2 class="h2" data-reveal>{{ $t('home.processTitle') }}</h2>
       <ol class="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2">
-        <li v-for="(p, i) in profile.process" :key="p.title.en" class="flex gap-4">
+        <li v-for="(p, i) in profile.process" :key="p.title.en" class="flex gap-4" data-reveal>
           <span class="font-mono text-sm text-accent" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</span>
           <div>
             <h3 class="font-semibold">{{ l(p.title) }}</h3>

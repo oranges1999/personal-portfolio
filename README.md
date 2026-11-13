@@ -3,7 +3,7 @@
 Bilingual (English / Vietnamese) portfolio site for Huy Nguyen, full-stack developer.
 Static site, deployed to GitHub Pages.
 
-**Stack:** Nuxt 4 · Vue 3 · TypeScript · Tailwind CSS 4 · `@nuxtjs/i18n` · Vitest · GitHub Actions
+**Stack:** Nuxt 4 · Vue 3 · TypeScript · Tailwind CSS 4 · GSAP · `@nuxtjs/i18n` · Vitest · GitHub Actions
 
 ## Run locally
 
@@ -34,6 +34,15 @@ then set `screenshots`, `demoUrl` or `repoUrl` on the project in `app/data/proje
 Anything left unset is simply not shown.
 
 **Change a project's status:** set `status` to `completed`, `in-progress` or `planned`.
+
+## Pages and animation
+
+Five pages (Home, Services, Projects, About, Contact) plus one case study per project.
+
+- `app/composables/useCurtain.ts` holds all GSAP code: the first-visit preloader, the
+  five-column curtain between pages, and the fade-up of content as it scrolls into view.
+- Add `data-reveal` to any element to have it fade up when it enters the viewport.
+- Visitors who prefer reduced motion get no preloader and no animation.
 
 ## Test
 

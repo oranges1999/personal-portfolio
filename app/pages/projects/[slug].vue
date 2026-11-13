@@ -22,11 +22,11 @@ useSeoMeta({
 
 <template>
   <article v-if="project" class="container-page py-12 sm:py-16">
-    <NuxtLink :to="{ path: localePath('/'), hash: '#projects' }" class="text-sm text-muted hover:text-fg">
+    <NuxtLink :to="localePath('/projects')" class="text-sm text-muted hover:text-fg">
       <span aria-hidden="true">←</span> {{ t('project.back') }}
     </NuxtLink>
 
-    <header class="mt-8 max-w-3xl">
+    <header class="mt-8 max-w-3xl" data-reveal>
       <ProjectStatusBadge :status="project.status" />
       <h1 class="mt-4 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">{{ l(project.title) }}</h1>
       <p class="mt-5 text-lg text-muted">{{ l(project.summary) }}</p>
@@ -42,19 +42,19 @@ useSeoMeta({
       </p>
     </header>
 
-    <section v-if="project.screenshots?.length" class="mt-14">
+    <section v-if="project.screenshots?.length" class="mt-14" data-reveal>
       <h2 class="text-2xl font-semibold tracking-tight">{{ t('project.screenshots') }}</h2>
       <div class="mt-6 grid gap-4 sm:grid-cols-2">
         <img v-for="s in project.screenshots" :key="s.src" :src="base + s.src" :alt="l(s.alt)" loading="lazy" class="w-full rounded-xl border border-border">
       </div>
     </section>
 
-    <section class="mt-14 max-w-3xl">
+    <section class="mt-14 max-w-3xl" data-reveal>
       <h2 class="text-2xl font-semibold tracking-tight">{{ t('project.problem') }}</h2>
       <p class="mt-4 text-muted">{{ l(project.problem) }}</p>
     </section>
 
-    <section v-if="project.roles?.length" class="mt-14">
+    <section v-if="project.roles?.length" class="mt-14" data-reveal>
       <h2 class="text-2xl font-semibold tracking-tight">{{ t('project.roles') }}</h2>
       <dl class="mt-6 grid gap-4 sm:grid-cols-2">
         <div v-for="r in project.roles" :key="r.name.en" class="card">
@@ -64,7 +64,7 @@ useSeoMeta({
       </dl>
     </section>
 
-    <section class="mt-14">
+    <section class="mt-14" data-reveal>
       <h2 class="text-2xl font-semibold tracking-tight">{{ planned ? t('project.plannedFeatures') : t('project.features') }}</h2>
       <div class="mt-6 grid gap-4 md:grid-cols-2">
         <div v-for="g in project.features" :key="g.title.en" class="card">
@@ -79,7 +79,7 @@ useSeoMeta({
       </div>
     </section>
 
-    <section class="mt-14 max-w-3xl">
+    <section class="mt-14 max-w-3xl" data-reveal>
       <h2 class="text-2xl font-semibold tracking-tight">{{ planned ? t('project.plannedHighlights') : t('project.highlights') }}</h2>
       <ol class="mt-6 grid gap-5">
         <li v-for="(h, i) in project.highlights" :key="h.en" class="flex gap-4">
@@ -89,9 +89,9 @@ useSeoMeta({
       </ol>
     </section>
 
-    <aside class="card mt-16 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center sm:p-8">
+    <aside data-reveal class="card mt-16 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center sm:p-8">
       <p class="text-xl font-semibold tracking-tight">{{ t('project.cta') }}</p>
-      <NuxtLink :to="{ path: localePath('/'), hash: '#contact' }" class="btn btn-primary">{{ t('project.ctaButton') }}</NuxtLink>
+      <NuxtLink :to="localePath('/contact')" class="btn btn-primary">{{ t('project.ctaButton') }}</NuxtLink>
     </aside>
   </article>
 </template>
