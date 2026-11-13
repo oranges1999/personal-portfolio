@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+:root {
+  --bg: #faf8f5;
+  --surface: #ffffff;
+  --fg: #1c1917;
+  --muted: #5f5953;
+  --border: #e4dfd8;
+  --accent: #c2410c;
+  --accent-fg: #ffffff;
+  --accent-soft: #fdebdf;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #141210;
+  --surface: #1d1a17;
+  --fg: #f3efea;
+  --muted: #a8a099;
+  --border: #322d28;
+  --accent: #fb923c;
+  --accent-fg: #1c1917;
+  --accent-soft: #33200f;
+  color-scheme: dark;
+}
+
+html { scroll-padding-top: 5rem; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+
+/* Preloader / page-transition overlay. Hidden unless the head script or GSAP turns it on. */
+.curtain { position: fixed; inset: 0; z-index: 100; visibility: hidden; pointer-events: none; }
+html.is-preloading .curtain { visibility: visible; pointer-events: auto; }
+html.is-preloading { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) { .curtain { display: none; } }
+
+@layer components {
+  .container-page { @apply mx-auto w-full max-w-5xl px-5 sm:px-8; }
+  .section { @apply py-16 sm:py-24 border-t border-border; }
+  .eyebrow { @apply font-mono text-xs uppercase tracking-widest text-accent; }
+  .h2 { @apply mt-3 text-3xl sm:text-4xl font-semibold tracking-tight text-balance; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-medium transition-colors; }
+  .btn-primary { @apply bg-accent text-accent-fg hover:opacity-90; }
+  .btn-ghost { @apply border border-border bg-surface text-fg hover:border-fg; }
+  .chip { @apply inline-block rounded-md border border-border bg-surface px-2 py-1 font-mono text-xs text-muted; }
+  .card { @apply rounded-xl border border-border bg-surface p-6; }
+}

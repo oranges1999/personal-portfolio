@@ -1,0 +1,112 @@
+{
+  "nav": {
+    "main": "Điều hướng chính",
+    "menu": "Menu",
+    "skip": "Bỏ qua, tới nội dung",
+    "services": "Dịch vụ",
+    "projects": "Dự án",
+    "about": "Giới thiệu",
+    "contact": "Liên hệ",
+    "home": "Trang chủ"
+  },
+  "theme": {
+    "toggle": "Đổi giao diện sáng / tối"
+  },
+  "lang": {
+    "switch": "Ngôn ngữ"
+  },
+  "footer": {
+    "built": "Làm bằng Nuxt và Tailwind CSS."
+  },
+  "seo": {
+    "homeTitle": "Huy Nguyen — Lập trình viên Full-Stack (Laravel, Vue/Nuxt, Node.js, AI Agent)",
+    "homeDescription": "Lập trình viên full-stack tại Việt Nam, xây dựng ứng dụng web trọn vẹn với Laravel, Vue/Nuxt, Node.js và AI agent. Xem dự án và liên hệ."
+  },
+  "home": {
+    "availability": "Đang nhận dự án freelance",
+    "viewProjects": "Xem dự án",
+    "hireUpwork": "Thuê tôi trên Upwork",
+    "servicesTitle": "Tôi có thể giúp bạn những gì",
+    "projectsTitle": "Dự án demo, tự làm từ đầu",
+    "projectsNote": "Mỗi dự án dùng thương hiệu hư cấu và dữ liệu mẫu. Nhãn trạng thái ghi đúng cái gì đã xong, cái gì còn trong kế hoạch.",
+    "processEyebrow": "Cách làm việc",
+    "processTitle": "Dễ làm việc cùng, dễ bàn giao",
+    "stackEyebrow": "Công nghệ",
+    "stackTitle": "Công cụ tôi dùng hằng ngày",
+    "contactTitle": "Kể tôi nghe về dự án của bạn",
+    "contactLead": "Gửi tôi thông tin chi tiết, tôi sẽ trả lời kèm kế hoạch và ước lượng rõ ràng.",
+    "contactOr": "Hoặc liên hệ trực tiếp",
+    "allServices": "Tất cả dịch vụ",
+    "allProjects": "Tất cả dự án",
+    "ctaTitle": "Bạn đang có một dự án?",
+    "ctaLead": "Gửi tôi thông tin chi tiết, tôi sẽ trả lời kèm kế hoạch và ước lượng rõ ràng.",
+    "ctaButton": "Liên hệ với tôi",
+    "aboutLink": "Xem thêm về tôi"
+  },
+  "status": {
+    "completed": "Đã hoàn thành · sắp có bản demo",
+    "in-progress": "Đang thực hiện",
+    "planned": "Trong kế hoạch"
+  },
+  "project": {
+    "readCase": "Xem chi tiết dự án",
+    "back": "Tất cả dự án",
+    "problem": "Bài toán",
+    "roles": "Ai dùng hệ thống",
+    "role": "Vai trò",
+    "canDo": "Được làm gì",
+    "features": "Tính năng",
+    "plannedFeatures": "Tính năng dự kiến",
+    "highlights": "Ghi chú kỹ thuật",
+    "plannedHighlights": "Mục tiêu và kế hoạch kỹ thuật",
+    "screenshots": "Ảnh chụp màn hình",
+    "demo": "Bản demo",
+    "repo": "Mã nguồn",
+    "plannedNote": "Dự án này chưa được thực hiện. Trang này mô tả những gì nó sẽ làm.",
+    "completedNote": "Phần code đã hoàn thành. Bản demo công khai và ảnh chụp sẽ được bổ sung sau khi triển khai.",
+    "cta": "Bạn cần một thứ tương tự?",
+    "ctaButton": "Liên hệ với tôi"
+  },
+  "contact": {
+    "name": "Tên của bạn",
+    "email": "Email",
+    "message": "Thông tin dự án",
+    "website": "Hãy để trống ô này",
+    "send": "Gửi tin nhắn",
+    "sending": "Đang gửi…",
+    "sent": "Cảm ơn bạn — tin nhắn đã được gửi. Tôi sẽ trả lời qua email.",
+    "failed": "Không gửi được tin nhắn. Vui lòng thử lại, hoặc gửi email cho tôi tại",
+    "errors": {
+      "required": "Vui lòng điền ô này.",
+      "invalid": "Vui lòng nhập địa chỉ email hợp lệ.",
+      "tooLong": "Nội dung quá dài."
+    }
+  },
+  "error": {
+    "notFoundTitle": "Không tìm thấy trang",
+    "notFoundBody": "Trang bạn tìm không tồn tại.",
+    "genericTitle": "Đã có lỗi xảy ra",
+    "home": "Về trang chủ"
+  },
+  "pages": {
+    "services": {
+      "eyebrow": "Dịch vụ",
+      "title": "Tôi có thể giúp bạn những gì",
+      "lead": "Năm mảng tôi làm hằng ngày. Phần lớn dự án cần hai, ba mảng cùng lúc, và đó là chỗ một lập trình viên full-stack giúp bạn đỡ phải điều phối nhiều người.",
+      "seoDescription": "Laravel và PHP, Vue và Nuxt, Node.js, AI agent với MCP, cơ sở dữ liệu và DevOps: những gì Huy Nguyen có thể xây dựng cho bạn."
+    },
+    "projects": {
+      "eyebrow": "Dự án",
+      "seoDescription": "Các dự án demo Huy Nguyen tự làm từ đầu: nền tảng đặt lịch hẹn, landing page app học ngoại ngữ và AI report agent."
+    },
+    "about": {
+      "eyebrow": "Giới thiệu",
+      "title": "Đôi nét về tôi",
+      "seoDescription": "Về Huy Nguyen, lập trình viên full-stack ở Hà Nội: kinh nghiệm, cách làm việc và công cụ sử dụng."
+    },
+    "contact": {
+      "eyebrow": "Liên hệ",
+      "seoDescription": "Liên hệ Huy Nguyen về dự án web của bạn: form liên hệ, Upwork, GitHub hoặc email."
+    }
+  }
+}

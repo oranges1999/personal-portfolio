@@ -20,7 +20,6 @@ Nguồn nội dung: doc "Spec dự án cá nhân và portfolio" và hồ sơ Upw
 
 - Không nhắc tới design tool cho file .pen (spec ghi là riêng tư).
 - Không hiện giá theo giờ, tên công ty đang làm, hay thông tin cá nhân ngoài các kênh liên hệ đã chọn.
-- Không có form liên hệ gửi qua server (GitHub Pages là site tĩnh).
 - Không có blog, CMS, analytics.
 
 ## Điều phải tránh
@@ -65,6 +64,15 @@ Footer
 
 **Trang case study** `/projects/<slug>`: vấn đề, vai trò người dùng, tính năng chính, stack, điểm kỹ thuật đáng chú ý, ảnh chụp (nếu có), link demo và repo (nếu có).
 
+**Form liên hệ → Google Sheet**
+
+- Form ở phần Contact: tên, email, nội dung. Kiểm tra dữ liệu phía trình duyệt, có ô bẫy (honeypot) chống bot.
+- Site gửi dữ liệu tới một Google Apps Script gắn với trang tính "Portfolio – Contact form submissions"; script ghi thêm một dòng: thời gian, tên, email, nội dung, ngôn ngữ, trang.
+- Trang tính ở chế độ riêng tư, chỉ chủ sở hữu xem được. Script chạy dưới quyền chủ sở hữu nên khách gửi được mà không đọc được trang tính.
+- Script giới hạn độ dài từng trường và bỏ qua bài gửi có ô bẫy được điền.
+- URL của script đặt trong cấu hình site (`NUXT_PUBLIC_CONTACT_ENDPOINT`). Chưa có URL thì form ẩn, chỉ hiện các link liên hệ.
+- Mã script nằm trong repo tại `google-apps-script/contact-form.gs`. Bạn dán vào trang tính và deploy một lần (tôi không deploy Apps Script thay bạn được).
+
 **Trạng thái dự án**
 
 | Dự án | Nhãn | Ghi chú |
@@ -85,14 +93,24 @@ Nội dung case study viết từ spec. Hai dự án chưa làm được mô t�
 
 ## Còn thiếu từ bạn
 
-1. Địa chỉ email muốn hiện công khai.
+1. ~~Địa chỉ email muốn hiện công khai.~~ Đã có: `nhuhuy1999@gmail.com`.
 2. Link repo của Booking Platform (tôi không thấy nó trong danh sách repo GitHub của bạn) và ảnh chụp màn hình nếu có.
 3. Sau khi code được merge vào nhánh mặc định: bật Pages một lần tại Settings → Pages → Source: "GitHub Actions".
 
-Thiếu mục 1 và 2 vẫn build được: kênh hoặc link nào chưa có thì không hiển thị.
+Thiếu mục 2 vẫn build được: kênh hoặc link nào chưa có thì không hiển thị.
 
 ## Kiểm tra trước khi báo xong
 
 - `nuxt generate` chạy không lỗi.
 - Mở bản build bằng trình duyệt ở 375px và 1280px, cả 2 ngôn ngữ, cả sáng và tối; chụp ảnh để xem lại.
 - Mọi link nội bộ hoạt động dưới đường dẫn con `/personal-portfolio/`.
+
+## Bổ sung 2026-11-13: nhiều trang, GSAP, preloader
+
+Theo yêu cầu của bạn sau bản đầu:
+
+- **5 trang** thay cho một trang chủ cuộn dài: Home, Services, Projects (danh sách + trang chi tiết), About, Contact. Menu dẫn tới trang, không cuộn.
+- **Preloader kiểu các cột so le**: màn hình chia 5 cột dọc. Lần đầu vào site, các cột che màn hình kèm tên và bộ đếm 0→100, rồi trượt lên lệch nhau. Khi chuyển trang, các cột trượt lên che trang cũ, hiện tên trang sắp tới, rồi trượt tiếp để lộ trang mới.
+- **GSAP + ScrollTrigger**: các khối nội dung hiện dần khi vào trang và khi cuộn tới.
+- Người xem bật "giảm chuyển động" thì không có preloader, không có animation.
+- Nếu JavaScript không chạy, nội dung vẫn hiện (lớp che tự gỡ sau vài giây, nội dung không bị ẩn sẵn trong HTML).

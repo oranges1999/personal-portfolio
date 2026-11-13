@@ -1,0 +1,112 @@
+{
+  "nav": {
+    "main": "Main",
+    "menu": "Menu",
+    "skip": "Skip to content",
+    "services": "Services",
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact",
+    "home": "Home"
+  },
+  "theme": {
+    "toggle": "Switch light / dark theme"
+  },
+  "lang": {
+    "switch": "Language"
+  },
+  "footer": {
+    "built": "Built with Nuxt and Tailwind CSS."
+  },
+  "seo": {
+    "homeTitle": "Huy Nguyen — Full-Stack Developer (Laravel, Vue/Nuxt, Node.js, AI Agents)",
+    "homeDescription": "Full-stack developer from Vietnam building web applications end to end with Laravel, Vue/Nuxt, Node.js and AI agents. See projects and get in touch."
+  },
+  "home": {
+    "availability": "Available for freelance work",
+    "viewProjects": "View projects",
+    "hireUpwork": "Hire me on Upwork",
+    "servicesTitle": "What I can help you with",
+    "projectsTitle": "Demo projects, built from scratch",
+    "projectsNote": "Each project uses a fictional brand and sample data. Status labels say honestly what is finished and what is still planned.",
+    "processEyebrow": "How I work",
+    "processTitle": "Easy to work with, easy to hand over",
+    "stackEyebrow": "Tech stack",
+    "stackTitle": "Tools I use day to day",
+    "contactTitle": "Tell me about your project",
+    "contactLead": "Send me the details and I'll reply with a clear plan and estimate.",
+    "contactOr": "Or reach me directly",
+    "allServices": "All services",
+    "allProjects": "All projects",
+    "ctaTitle": "Have a project in mind?",
+    "ctaLead": "Send me the details and I'll reply with a clear plan and estimate.",
+    "ctaButton": "Get in touch",
+    "aboutLink": "More about me"
+  },
+  "status": {
+    "completed": "Completed · live demo coming soon",
+    "in-progress": "In progress",
+    "planned": "Planned"
+  },
+  "project": {
+    "readCase": "Read the case study",
+    "back": "All projects",
+    "problem": "The problem",
+    "roles": "Who uses it",
+    "role": "Role",
+    "canDo": "What they can do",
+    "features": "Features",
+    "plannedFeatures": "Planned features",
+    "highlights": "Technical notes",
+    "plannedHighlights": "Goals and technical plan",
+    "screenshots": "Screenshots",
+    "demo": "Live demo",
+    "repo": "Source code",
+    "plannedNote": "This project has not been built yet. This page describes what it will do.",
+    "completedNote": "The code is finished. A public demo and screenshots will be added once it is deployed.",
+    "cta": "Need something similar?",
+    "ctaButton": "Get in touch"
+  },
+  "contact": {
+    "name": "Your name",
+    "email": "Email",
+    "message": "Project details",
+    "website": "Leave this field empty",
+    "send": "Send message",
+    "sending": "Sending…",
+    "sent": "Thanks — your message was sent. I'll reply by email.",
+    "failed": "The message could not be sent. Please try again, or email me at",
+    "errors": {
+      "required": "This field is required.",
+      "invalid": "Please enter a valid email address.",
+      "tooLong": "This is too long."
+    }
+  },
+  "error": {
+    "notFoundTitle": "Page not found",
+    "notFoundBody": "The page you are looking for does not exist.",
+    "genericTitle": "Something went wrong",
+    "home": "Back to home"
+  },
+  "pages": {
+    "services": {
+      "eyebrow": "Services",
+      "title": "What I can help you with",
+      "lead": "Five areas I work in day to day. Most projects need two or three of them at once, which is where a full-stack developer saves you coordination.",
+      "seoDescription": "Laravel and PHP, Vue and Nuxt, Node.js, AI agents with MCP, databases and DevOps: what Huy Nguyen can build for you."
+    },
+    "projects": {
+      "eyebrow": "Projects",
+      "seoDescription": "Demo projects built from scratch by Huy Nguyen: an appointment booking platform, a language-learning landing page and an AI report agent."
+    },
+    "about": {
+      "eyebrow": "About",
+      "title": "A bit about me",
+      "seoDescription": "About Huy Nguyen, a full-stack developer from Hanoi: background, how I work and the tools I use."
+    },
+    "contact": {
+      "eyebrow": "Contact",
+      "seoDescription": "Get in touch with Huy Nguyen about your web project: contact form, Upwork, GitHub or email."
+    }
+  }
+}
