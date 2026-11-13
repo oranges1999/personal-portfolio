@@ -1,0 +1,70 @@
+{
+  "nav": { "main": "Main", "menu": "Menu", "skip": "Skip to content", "services": "Services", "projects": "Projects", "about": "About", "contact": "Contact" },
+  "theme": { "toggle": "Switch light / dark theme" },
+  "lang": { "switch": "Language" },
+  "footer": { "built": "Built with Nuxt and Tailwind CSS." },
+  "seo": {
+    "homeTitle": "Huy Nguyen — Full-Stack Developer (Laravel, Vue/Nuxt, Node.js, AI Agents)",
+    "homeDescription": "Full-stack developer from Vietnam building web applications end to end with Laravel, Vue/Nuxt, Node.js and AI agents. See projects and get in touch."
+  },
+  "home": {
+    "availability": "Available for freelance work",
+    "viewProjects": "View projects",
+    "hireUpwork": "Hire me on Upwork",
+    "servicesEyebrow": "Services",
+    "servicesTitle": "What I can help you with",
+    "projectsEyebrow": "Projects",
+    "projectsTitle": "Demo projects, built from scratch",
+    "projectsNote": "Each project uses a fictional brand and sample data. Status labels say honestly what is finished and what is still planned.",
+    "processEyebrow": "How I work",
+    "processTitle": "Easy to work with, easy to hand over",
+    "stackEyebrow": "Tech stack",
+    "stackTitle": "Tools I use day to day",
+    "aboutEyebrow": "About",
+    "aboutTitle": "A bit about me",
+    "contactEyebrow": "Contact",
+    "contactTitle": "Tell me about your project",
+    "contactLead": "Send me the details and I'll reply with a clear plan and estimate.",
+    "contactOr": "Or reach me directly"
+  },
+  "status": {
+    "completed": "Completed · live demo coming soon",
+    "in-progress": "In progress",
+    "planned": "Planned"
+  },
+  "project": {
+    "readCase": "Read the case study",
+    "back": "All projects",
+    "problem": "The problem",
+    "roles": "Who uses it",
+    "role": "Role",
+    "canDo": "What they can do",
+    "features": "Features",
+    "plannedFeatures": "Planned features",
+    "highlights": "Technical notes",
+    "plannedHighlights": "Goals and technical plan",
+    "screenshots": "Screenshots",
+    "demo": "Live demo",
+    "repo": "Source code",
+    "plannedNote": "This project has not been built yet. This page describes what it will do.",
+    "completedNote": "The code is finished. A public demo and screenshots will be added once it is deployed.",
+    "cta": "Need something similar?",
+    "ctaButton": "Get in touch"
+  },
+  "contact": {
+    "name": "Your name",
+    "email": "Email",
+    "message": "Project details",
+    "website": "Leave this field empty",
+    "send": "Send message",
+    "sending": "Sending…",
+    "sent": "Thanks — your message was sent. I'll reply by email.",
+    "failed": "The message could not be sent. Please try again, or email me at",
+    "errors": {
+      "required": "This field is required.",
+      "invalid": "Please enter a valid email address.",
+      "tooLong": "This is too long."
+    }
+  },
+  "error": { "notFoundTitle": "Page not found", "notFoundBody": "The page you are looking for does not exist.", "genericTitle": "Something went wrong", "home": "Back to home" }
+}
